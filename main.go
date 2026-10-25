@@ -1,21 +1,18 @@
 package main
 
 import (
-    "fmt"
-    "net/http"
+	"fmt"
+	"net/http"
 )
 
-func getHandler(w http.ResponseWriter, r *http.Request){
-	fmt.Fprintf(w, "Hello")
-}
+var server_port = 8080
 
 func main() {
-	// Handlers
-    http.HandleFunc("/", getHandler)
+	fmt.Printf("server is started on :%d\n", server_port)
 
-    fmt.Println("Starting server at port 8080")
-    err := http.ListenAndServe(":8080", nil)
-    if err != nil {
-        fmt.Println("Error starting the server:", err)
-    }
+	addr := fmt.Sprintf(":%d", server_port)
+	err := http.ListenAndServe(addr, nil)
+	if err != nil {
+		fmt.Printf("Please, make sure that this port is free:%d\n", server_port)
+	}
 }
