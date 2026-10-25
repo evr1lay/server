@@ -7,8 +7,15 @@ import (
 
 var server_port = 8080
 
+func defaultHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, r.Method)
+	fmt.Println(r.Method)
+}
+
 func main() {
-	fmt.Printf("server is started on :%d\n", server_port)
+	http.HandleFunc("/", defaultHandler)
+
+	fmt.Printf("server is started on http://localhost:%d\n", server_port)
 
 	addr := fmt.Sprintf(":%d", server_port)
 	err := http.ListenAndServe(addr, nil)
